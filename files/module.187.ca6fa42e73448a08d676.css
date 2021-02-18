@@ -1,0 +1,92 @@
+
+.full-container[data-v-6febb0e8] {
+  display: block;
+  margin-bottom: 2em;
+}
+.full-container[data-v-6febb0e8]::after {
+  display: block;
+  content: '';
+  clear: both;
+}
+
+
+.container[data-v-3d020361] {
+  display: flex;
+  justify-content: center;
+}
+.form[data-v-3d020361] {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  padding: 1.3em 3em;
+}
+.logo[data-v-3d020361] {
+  width: 160px; /* FIXME: px/% ? */
+  display: block;
+}
+.motto[data-v-3d020361] {
+  color: rgb(52, 152, 219);
+  font-weight: 400;
+  margin-bottom: 1.5em;
+}
+.form-content[data-v-3d020361] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.img[data-v-3e1b4641] {
+  /* width and height here should be synced with backend */
+  width: 90px;
+  height: 35px;
+  margin-left: 1px;
+  background-color: rgb(216, 216, 216);
+  cursor: pointer;
+}
+
+
+.form-item[data-v-491b616c] {
+  margin-bottom: 12px;
+}
+.form-check[data-v-491b616c] {
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 6px;
+}
+.form-input[data-v-491b616c] {
+  font-size: .875em;
+}
+label[data-v-491b616c] {
+  margin-bottom: 6px;
+}
+.btn-login[data-v-491b616c] {
+  width: 100%;
+  font-size: .875em;
+}
+.form-bottom[data-v-491b616c] {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.openid-options[data-v-491b616c] {
+  margin-top: 6px;
+  color: #888;
+  text-align: center;
+}
+.openid-options > *[data-v-491b616c]:first-child {
+  margin-right: 2em;
+}
+.openid-options .icons[data-v-491b616c] {
+  font-size: 1.1rem;
+}
+.openid-options .icons > *[data-v-491b616c]:not(:last-child) {
+  margin-right: .6rem;
+}
+hr[data-v-491b616c] {
+  height: 2px;
+  background-color: rgb(232, 232, 232);
+  border: none;
+}
+
