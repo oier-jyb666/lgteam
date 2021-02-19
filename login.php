@@ -528,9 +528,8 @@
        <span data-v-5d3ff779="" class="helper"></span>
       </div> 
       <nav data-v-1bdb8ce2="" data-v-5d3ff779="" class="user-nav"> 
-       <a data-v-303bbf52="" data-v-1bdb8ce2="" href="https://www.luogu.com.cn/auth/login" aria-current="page" class="login router-link-exact-active router-link-active color-none"><span data-v-1bdb8ce2="">登录</span></a> 
-       <a data-v-303bbf52="" data-v-1bdb8ce2="" href="https://www.luogu.com.cn/auth/register" class="login color-none"><span data-v-1bdb8ce2="">注册</span></a> 
-       <img data-v-1bdb8ce2="" src="./files/1.png" class="avatar" />
+       <?php if(!$_SESSION["name"]) { ?><a data-v-303bbf52="" data-v-1bdb8ce2="" href="login.php" aria-current="page" class="login router-link-exact-active router-link-active color-none"><span data-v-1bdb8ce2="">登录</span></a> <?php } ?>
+       <img data-v-1bdb8ce2="" src="https://cdn.luogu.com.cn/upload/usericon/<?php echo $_SESSION["uid"]==''?1:$_SESSION["uid"]; ?>.png" class="avatar" referrerPolicy="no-referrer">
       </nav>
      </div>
     </div> 
@@ -582,7 +581,7 @@
               function(data) {
                swal(data);
                if(!data["login"]) reimg();
-               else window.location.href="/";
+               else window.location.href="./";
               }
              );
             }
