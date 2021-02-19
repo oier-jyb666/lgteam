@@ -33,7 +33,9 @@
   $fh=mysqli_query($con,$sql);
   $_SESSION['code'] = date("Y-m-d H:i");
   if($fh) echo "{\"return\":true,\"because\":\"数据添加成功\"}";
-  else echo "{\"return\":false,\"because\":\"数据库已有此数据/数据库出错惹\"}";
+  else{
+    echo "{\"return\":false,\"because\":\"数据库已有此数据/数据库出错惹".$error."\"}";
+  } 
 ?>
 <?php } else { ?>{"return":false,"because":"一分钟内只能调用一次"}<?php } ?>
 <?php } else { ?>{"return":false,"because":"id为空"}<?php } ?>

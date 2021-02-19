@@ -530,8 +530,8 @@
        </nav>
       </div> 
       <nav data-v-019a82aa="" data-v-52820d90="" class="lfe-caption bread-crumb">
-       <span data-v-019a82aa=""><a data-v-303bbf52="" data-v-019a82aa="" href="https://www.luogu.com.cn/" colorscheme="default" class="link color-default">OIer club</a> <span data-v-019a82aa="" class="text"> / </span></span>
-       <span data-v-019a82aa=""><a data-v-303bbf52="" data-v-019a82aa="" href="https://www.luogu.com.cn/training/list" colorscheme="default" class="link color-default">团队列表</a> 
+       <span data-v-019a82aa=""><a data-v-303bbf52="" data-v-019a82aa="" href="#" colorscheme="default" class="link color-default">OIer club</a> <span data-v-019a82aa="" class="text"> / </span></span>
+       <span data-v-019a82aa=""><a data-v-303bbf52="" data-v-019a82aa="" href="#" colorscheme="default" class="link color-default">团队列表</a> 
         <!----></span>
       </nav> 
       <h1 data-v-52820d90="" class="lfe-h1">团队列表</h1> 
