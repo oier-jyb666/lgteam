@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <?php header('content-type:application/json') ?>
 <?php include "./mysql.php" ?>
-<?php if(!$_SESSION['uid']) header("Refresh:0;url=./login.php");?>
+<?php if(!$_SESSION['uid']) header("Refresh:0;url=./login.php"); else { ?>
 <?php if($_GET["id"]) { ?>
 <?php if($_SESSION['code'] != date("Y-m-d H:i")) { ?>
 <?php
@@ -26,13 +26,15 @@
   $master=json_encode($x->currentData->team->master);//建立者(json)
   $master=str_replace("\\","\\\\",$master);
   $time=date("Y-m-d H:i:s");
+  $recorder=$_SESSION['name'];
   $con = mysqli_connect($servername, $username, $password, $sjkname);mysqli_query($con , "set names utf8");
-  $sql="INSERT INTO `team` (id,name,memberCount,description,joinPermission,master,time) 
-        VALUES ('$id','$name','$memberCount','$description','$joinPermission','$master','$time')";
+  $sql="INSERT INTO `team` (id,name,memberCount,description,joinPermission,master,time,recorder) 
+        VALUES ('$id','$name','$memberCount','$description','$joinPermission','$master','$time','$recorder')";
   $fh=mysqli_query($con,$sql);
   $_SESSION['code'] = date("Y-m-d H:i");
   if($fh) echo "{\"return\":true,\"because\":\"数据添加成功\"}";
-  else echo "{\"return\":false,\"because\":\"数据库已有此数据\"}";
+  else echo "{\"return\":false,\"because\":\"数据库已有此数据/数据库出错惹\"}";
 ?>
 <?php } else { ?>{"return":false,"because":"一分钟内只能调用一次"}<?php } ?>
 <?php } else { ?>{"return":false,"because":"id为空"}<?php } ?>
+<?php } ?>

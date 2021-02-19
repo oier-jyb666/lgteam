@@ -1,76 +1,47 @@
-<?php 
+<?php
+ 
 session_start();
-//Settings: You can customize the captcha here
-$image_width = 120;
-$image_height = 40;
-$characters_on_image = 4;
-$font = 'c:/windows/fonts/arial.ttf';
-
-//The characters that can be used in the CAPTCHA code.
-//avoid confusing characters (l 1 and i for example)
-$possible_letters = 'ABCDEFGHIGKLMNOPQRSTUVWXYZ';
-$random_dots = 10;
-$random_lines = 30;
-$captcha_text_color="0x142864";
-$captcha_noice_color = "0x142864";
-
-$code = '';
-
-$i = 0;
-while ($i < $characters_on_image) { 
-$code .= substr($possible_letters, mt_rand(0, strlen($possible_letters)-1), 1);
-$i++;
+ 
+//创建随机码
+for($i=0;$i<4;$i++){
+    $_nmsg .= dechex(mt_rand(0, 15));
 }
-
-
-$font_size = $image_height * 0.70;
-$image = @imagecreate($image_width, $image_height);
-
-
-/* setting the background, text and noise colours here */
-$background_color = imagecolorallocate($image, 255, 255, 255);
-
-$arr_text_color = hexrgb($captcha_text_color);
-$text_color = imagecolorallocate($image, $arr_text_color['red'], 
-		$arr_text_color['green'], $arr_text_color['blue']);
-
-$arr_noice_color = hexrgb($captcha_noice_color);
-$image_noise_color = imagecolorallocate($image, $arr_noice_color['red'], 
-		$arr_noice_color['green'], $arr_noice_color['blue']);
-
-
-/* generating the dots randomly in background */
-for( $i=0; $i<$random_dots; $i++ ) {
-imagefilledellipse($image, mt_rand(0,$image_width),
- mt_rand(0,$image_height), 2, 3, $image_noise_color);
+ 
+//保存在session里
+$_SESSION['code'] = $_nmsg;
+ 
+//长和高
+$_width = 90;
+$_height = 35;
+//创建图像
+$_img = imagecreatetruecolor($_width, $_height);
+$_white = imagecolorallocate($_img, 255, 255, 255);
+imagefill($_img, 0, 0, $_white);
+ 
+//创建黑色边框
+$_black = imagecolorallocate($_img, 100, 100, 100);
+imagerectangle($_img, 0, 0, $_width-1, $_height-1, $_black);
+ 
+//随机划线条
+for ($i=0;$i<6;$i++) {
+	$_rnd_color= imagecolorallocate($_img,mt_rand(0,255),mt_rand(0,255),mt_rand(0,255));
+	imageline($_img,mt_rand(0,75),mt_rand(0,25),mt_rand(0,75),mt_rand(0,25),$_rnd_color);
 }
-
-
-/* generating lines randomly in background of image */
-for( $i=0; $i<$random_lines; $i++ ) {
-imageline($image, mt_rand(0,$image_width), mt_rand(0,$image_height),
- mt_rand(0,$image_width), mt_rand(0,$image_height), $image_noise_color);
+//随机打雪花
+for ($i=1;$i<100;$i++) {
+	imagestring($_img,1,mt_rand(1,$_width),mt_rand(1,$_height),"*",
+		imagecolorallocate($_img,mt_rand(200,255),mt_rand(200,255),mt_rand(200,255)));
 }
-
-
-/* create a text box and add 6 letters code in it */
-$textbox = imagettfbbox($font_size, 0, $font, $code); 
-$x = ($image_width - $textbox[4])/2;
-$y = ($image_height - $textbox[5])/2;
-imagettftext($image, $font_size, 0, $x, $y, $text_color, $font , $code);
-
-
-/* Show captcha image in the page html page */
-header('Content-Type: image/jpeg');// defining the image type to be shown in browser widow
-imagejpeg($image);//showing the image
-imagedestroy($image);//destroying the image instance
-$_SESSION['code'] = strtoupper($code);
-function hexrgb ($hexstr)
-{
-  $int = hexdec($hexstr);
-
-  return array("red" => 0xFF & ($int >> 0x10),
-               "green" => 0xFF & ($int >> 0x8),
-               "blue" => 0xFF & $int);
+//输出验证码
+for ($i=0;$i<strlen($_SESSION['code']);$i++){
+	imagestring($_img,mt_rand(3,5),$i*$_width/4+mt_rand(1,10),
+		mt_rand(1,$_height/2),$_SESSION['code'][$i],
+		imagecolorallocate($_img,mt_rand(0,150),mt_rand(0,100),mt_rand(0,150)));
 }
-?>
+ 
+//输出图像
+ob_clean(); 
+header('Content-Type:image/png');
+imagepng($_img);
+//销毁
+imagedestroy($_img);
